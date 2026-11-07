@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+class CustomerPayment extends Model
+{
+    protected $guarded = ['id'];
+
+    protected function casts(): array
+    {
+        return ['amount' => 'decimal:2', 'exchange_rate' => 'decimal:4', 'amount_htg' => 'decimal:2'];
+    }
+
+    public function customer(): BelongsTo { return $this->belongsTo(Customer::class); }
+    public function cashSession(): BelongsTo { return $this->belongsTo(CashSession::class); }
+    public function user(): BelongsTo { return $this->belongsTo(User::class); }
+}
